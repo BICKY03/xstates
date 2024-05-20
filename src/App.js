@@ -119,10 +119,8 @@ function App() {
       </div>
 
       <div className="selected-location">
-        <h2>Selected Location:</h2>
-        <p>Country: {countryName}</p>
-        <p>State: {stateName}</p>
-        <p>City: {cityName}</p>
+        <h2>You Selected:{countryName},{stateName}, {cityName}</h2>
+      
       </div>
     </div>
   );

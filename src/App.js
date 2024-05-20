@@ -67,16 +67,20 @@ function App() {
   const changeCountryHandler = (event) => {
     setCountryName(event.target.value);
     setStateName(''); // reset state and city when country changes
+    setCityName('');
+    setState([]);
     setCity([]);
   };
 
   const changeStateHandler = (event) => {
     setStateName(event.target.value);
+    setCityName(''); // reset city when state changes
+    setCity([]);
   };
 
-  const changeCityHandler=(event)=>{
-    setCityName(event.target.value)
-  }
+  const changeCityHandler = (event) => {
+    setCityName(event.target.value);
+  };
 
   return (
     <div className="App">
@@ -90,37 +94,39 @@ function App() {
         ))}
       </select>
 
-      
-        <div>
-          <label htmlFor="states">Select A state</label>
-          <select id="states" name="states" onChange={changeStateHandler} value={stateName}>
-            <option value="">--select a state---</option>
-            {state.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
-      
+      <div>
+        <label htmlFor="states">Select A state</label>
+        <select id="states" name="states" onChange={changeStateHandler} value={stateName} disabled={!countryName}>
+          <option value="">--select a state---</option>
+          {state.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      
-        <div>
-          <label htmlFor="cities">Select A city</label>
-          <select id="cities" name="cities" value={cityName} onChange={changeCityHandler}>
-            <option value="">--select a city---</option>
-            {city.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
-      
+      <div>
+        <label htmlFor="cities">Select A city</label>
+        <select id="cities" name="cities" onChange={changeCityHandler} value={cityName} disabled={!stateName}>
+          <option value="">--select a city---</option>
+          {city.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="selected-location">
+        <h2>Selected Location:</h2>
+        <p>Country: {countryName}</p>
+        <p>State: {stateName}</p>
+        <p>City: {cityName}</p>
+      </div>
     </div>
   );
 }
 
 export default App;
-
 
